@@ -1,0 +1,7 @@
+﻿bin/
+obj/
+.vs/
+__pycache__/
+*.pyc
+.env
+chroma_movies/

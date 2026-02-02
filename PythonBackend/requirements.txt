@@ -1,0 +1,9 @@
+﻿fastapi
+uvicorn
+pandas
+numpy
+python-dotenv
+langchain
+langchain-openai
+langchain-chroma
+chromadb

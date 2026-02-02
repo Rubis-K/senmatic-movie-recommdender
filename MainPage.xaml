@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             Title="Movie Recommender">
+
+    <VerticalStackLayout Padding="10">
+        <Entry x:Name="QueryEntry" Placeholder="Enter a movie description" />
+        <Picker x:Name="CategoryPicker" Title="Select category" />
+        <Picker x:Name="TonePicker" Title="Select tone" />
+        <Button Text="Get Movies" Clicked="OnGetMoviesClicked"/>
+
+        <CollectionView x:Name="MoviesListView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="5">
+                        <Image Source="{Binding Poster}" HeightRequest="120"/>
+                        <Label Text="{Binding Title}" FontAttributes="Bold"/>
+                        <Label Text="{Binding Description}" LineBreakMode="TailTruncation"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
