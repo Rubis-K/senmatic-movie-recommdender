@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from semantic_movie_recommendations import retrive_semantic_recommendations
 import uvicorn
+import os
+
+
 
 
 class MovieQuery(BaseModel):
@@ -10,7 +13,7 @@ class MovieQuery(BaseModel):
     category: str
     tone: str
 
-app = FastAPI(title="Semantic Movie Recommender API")
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -44,7 +47,7 @@ def recommend(q: MovieQuery):
     
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # Azure provides PORT
+    port = int(os.environ.get("PORT", 8000))
     uvicorn.run("movie_recommender_api:app", host="0.0.0.0", port=port)
 
     #uvicorn movie_recommender_api:app --reload

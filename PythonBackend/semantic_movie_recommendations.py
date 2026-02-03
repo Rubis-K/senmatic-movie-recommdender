@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from dotenv import load_dotenv
 import re
 import os
 
@@ -9,7 +8,7 @@ from langchain_text_splitters import CharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
 
-load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 movies = pd.read_csv('movies_with_emotions.csv')
 movies["poster"] = movies["poster"] + "&fife=w800"
