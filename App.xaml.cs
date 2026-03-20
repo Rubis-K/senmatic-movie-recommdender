@@ -6,7 +6,13 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+        
+        }
+
+        protected override Window CreateWindow(IActivationState activationState)
+        {
+            // Instead of MainPage = new AppShell();
+            return new Window(new AppShell());
         }
     }
 }

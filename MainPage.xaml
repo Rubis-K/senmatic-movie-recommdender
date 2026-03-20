@@ -2,24 +2,115 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp1.MainPage"
-             Title="Movie Recommender">
+             BackgroundColor="#F9F9F9"
+             Title="">
 
-    <VerticalStackLayout Padding="10">
-        <Entry x:Name="QueryEntry" Placeholder="Enter a movie description" />
-        <Picker x:Name="CategoryPicker" Title="Select category" />
-        <Picker x:Name="TonePicker" Title="Select tone" />
-        <Button Text="Get Movies" Clicked="OnGetMoviesClicked"/>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-        <CollectionView x:Name="MoviesListView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout Padding="5">
-                        <Image Source="{Binding Poster}" HeightRequest="120"/>
-                        <Label Text="{Binding Title}" FontAttributes="Bold"/>
-                        <Label Text="{Binding Description}" LineBreakMode="TailTruncation"/>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+            <!-- Title -->
+            <Label Text="Movie Recommender"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#845BFF"/>
+
+            <!-- Input area -->
+            <Frame CornerRadius="20"
+                   BackgroundColor="#C5CDFB"
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="What you want to watch?"
+                           FontSize="16"
+                           Padding="8,0,0,0"
+                           TextColor="#837483"/>
+                    <Entry x:Name="QueryEntry"
+                           Placeholder="Describe what you want to watch..."
+                           PlaceholderColor="#837483"
+                           TextColor="#222222"
+                           Focused="OnEntryFocused"
+                           Unfocused="OnEntryUnfocused"
+                           BackgroundColor="White"
+                           HeightRequest="45"
+                           Margin="0"/>
+                    <Label Text="What you want to watch?"
+                           FontSize="16"
+                           Padding="8,0,0,0"
+                           TextColor="#837483"/>
+                    <HorizontalStackLayout Spacing="8">
+
+                        <Frame CornerRadius="15" BackgroundColor="White" Padding="0" HeightRequest="45" HorizontalOptions="FillAndExpand">
+                            <VerticalStackLayout Spacing="5">
+                                
+                                <Picker x:Name="CategoryPicker"
+                                        Title="Select category"
+                                        FontSize="12"
+                                        BackgroundColor="Transparent"
+                                        TextColor="#222222"
+                                        
+                                        Focused="OnPickerFocused"
+                                        Unfocused="OnPickerUnfocused"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame CornerRadius="15" BackgroundColor="White" Padding="0" HorizontalOptions="FillAndExpand">
+                            <Picker x:Name="TonePicker"
+                                    Title="Select tone"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#222222"
+                                    Focused="OnPickerFocused"
+                                    Unfocused="OnPickerUnfocused"/>
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Button x:Name="GetMoviesButton"
+                            Text="Get Recommended"
+                            BackgroundColor="#845BFF"
+                            TextColor="White"
+                            CornerRadius="20"
+                            HeightRequest="50"
+                            Clicked="OnGetMoviesClicked"
+                            Pressed="OnButtonPressed"
+                            Released="OnButtonReleased"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Results -->
+            <Label Text="Results:" 
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#845BFF"/>
+
+            <CollectionView x:Name="MoviesListView" 
+                            Margin="0"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame CornerRadius="15" 
+                               BackgroundColor="#F2F2F2"
+                               Padding="10"
+                               Margin="0,5"
+                               HasShadow="True">
+                            <HorizontalStackLayout Spacing="10">
+                                <Image Source="{Binding Poster}" 
+                                       HeightRequest="80" 
+                                       WidthRequest="60" 
+                                       Aspect="AspectFill"
+                                       VerticalOptions="Center"/>
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="{Binding Title}" 
+                                           FontAttributes="Bold"
+                                           TextColor="#845BFF"/>
+                                    <Label Text="{Binding Description}" 
+                                           LineBreakMode="TailTruncation"
+                                           TextColor="#837483"
+                                           FontSize="14"/>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -5,7 +6,7 @@ from semantic_movie_recommendations import retrive_semantic_recommendations
 import uvicorn
 import os
 
-
+load_dotenv
 
 
 class MovieQuery(BaseModel):
@@ -19,7 +20,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["*"],    
     allow_headers=["*"],
 )
 

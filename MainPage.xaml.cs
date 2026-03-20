@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using Microsoft.Extensions.Logging;
 
 namespace MauiApp1;
 
@@ -24,7 +25,7 @@ public partial class MainPage : ContentPage
             string tone = TonePicker.SelectedItem?.ToString() ?? "All";
 
             var payload = new { query = query, category = category, tone = tone };
-            var response = await _httpClient.PostAsJsonAsync("https://movierecommenderapi.azurewebsites.net/", payload);
+            var response = await _httpClient.PostAsJsonAsync("http://172.193.60.120/recommend", payload);
 
             if (response.IsSuccessStatusCode)
             {
@@ -41,6 +42,44 @@ public partial class MainPage : ContentPage
             await DisplayAlert("Error", ex.Message, "OK");
         }
     }
+
+    private void OnEntryFocused(object sender, FocusEventArgs e)
+    {
+        var entry = sender as Entry;
+        entry.TextColor = Color.FromArgb("#845BFF"); // primary highlight
+    }
+
+    private void OnEntryUnfocused(object sender, FocusEventArgs e)
+    {
+        var entry = sender as Entry;
+        entry.TextColor = Color.FromArgb("#222222");
+    }
+
+    private void OnPickerFocused(object sender, FocusEventArgs e)
+    {
+        var picker = sender as Picker;
+        picker.TextColor = Color.FromArgb("#845BFF"); // highlight text
+    }
+
+    private void OnPickerUnfocused(object sender, FocusEventArgs e)
+    {
+        var picker = sender as Picker;
+        picker.TextColor = Color.FromArgb("#222222");
+    }
+
+    private void OnButtonPressed(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        button.BackgroundColor = Color.FromArgb("#6F47E0"); // slightly darker purple
+        button.TextColor = Color.FromArgb("#F9F9F9");       // light text
+    }
+
+    private void OnButtonReleased(object sender, EventArgs e)
+    {
+        var button = sender as Button;
+        button.BackgroundColor = Color.FromArgb("#845BFF");
+        button.TextColor = Color.FromArgb("#FFFFFF");
+    }
 }
 
 public class MovieResult
@@ -49,3 +88,4 @@ public class MovieResult
     public string Poster { get; set; }
     public string Description { get; set; }
 }
+
